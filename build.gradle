@@ -1,0 +1,36 @@
+plugins {
+    id 'java'
+}
+
+group 'com.example.flink'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    javaVersion = '1.8'
+    flinkVersion = '1.7.1'
+    scalaBinaryVersion = '2.11'
+    slf4jVersion = '1.7.25'
+}
+
+dependencies {
+    compile group: 'org.apache.flink', name: 'flink-core', version: flinkVersion
+    compile group: 'org.apache.flink', name: "flink-streaming-java_${scalaBinaryVersion}", version: flinkVersion
+    compile group: 'org.apache.flink', name: 'flink-java', version: flinkVersion
+
+    compile group: 'org.slf4j', name: 'slf4j-api', version: slf4jVersion
+
+    runtime group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
+    runtime group: 'org.slf4j', name: 'log4j-over-slf4j', version: slf4jVersion
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'com.example.flink.JoinDeadlock'
+    }
+}
